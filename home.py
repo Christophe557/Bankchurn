@@ -19,9 +19,7 @@ st.subheader("Exploratory Data Analysis")
 
 @st.cache_data(ttl=60)
 def load_data(filename):
-    data = pd.read_csv(
-        os.path.join(projectpath, "mlpro-classification-bank-churn-2025", filename)
-    )
+    data = pd.read_csv(os.path.join(projectpath, "dataset", filename))
     return data
 
 
