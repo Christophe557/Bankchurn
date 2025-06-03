@@ -1,3 +1,5 @@
 .venv
 bank-churn*
+Docs/
+*.ipynb
 

@@ -70,5 +70,36 @@ def mono_cont():
     return fig
 
 
-fig2 = mono_cont()
+@st.cache_data()
+def mono_cont2():
+    fig, ax = plt.subplots(
+        2, 5, squeeze=True, figsize=(15, 4), gridspec_kw={"height_ratios": [3, 1]}
+    )
+    fig.suptitle("ANALYSE MONOVARIEE VARIABLES CONTINUES")
+    for i, v in enumerate(cont_list):
+        df[v].plot(
+            ax=ax[0, i],
+            kind="hist",
+            bins=20,
+            color="lightblue",
+            edgecolor="black",
+            title=v,
+        )
+        ax[0, i].set(xlabel=None, xticklabels=[])
+        if i > 0:
+            ax[0, i].set(ylabel=None)
+
+    for i, v in enumerate(cont_list):
+        df[v].plot(
+            ax=ax[1, i],
+            kind="box",
+            vert=False,
+            color="black",
+        )
+        ax[1, i].set(ylabel=None, yticklabels=[])
+    fig.tight_layout()
+    return fig
+
+
+fig2 = mono_cont2()
 st.pyplot(fig2)
