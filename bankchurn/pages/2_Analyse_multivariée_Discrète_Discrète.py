@@ -64,20 +64,26 @@ st.pyplot(fig3)
 
 
 @st.cache_data()
-def multi_disc_y():
-    st.markdown("##### Analyse multivariée discrète / étiquette y")
-    fig, ax = plt.subplots(1, len(disc_list) - 1, figsize=(20, 4))
-    fig.suptitle("HEATMAP CORRELATION VARIABLES DISCRETE / ETIQUETTE Y")
-    for i, v in enumerate(disc_list[:-1]):
+def multi_disc_(d):
+    st.markdown(f"##### Analyse multivariée discrète / {d}")
+    fig, ax = plt.subplots(1, len(disc_list), figsize=(20, 4))
+    fig.suptitle(f"HEATMAP CORRELATION VARIABLES DISCRETE / {d}")
+    match d:
+        case "Tenure":
+            vmax = 0.08
+        case _:
+            vmax = 0.5
+
+    for i, v in enumerate(disc_list):
         sns.heatmap(
             ax=ax[i],
-            data=pd.crosstab(df[disc_list[-1]], df[v], normalize=True),
+            data=pd.crosstab(df[d], df[v], normalize=True),
             annot=True,
             annot_kws={"size": 10},
             vmin=0,
-            vmax=0.5,
+            vmax=vmax,
             fmt=".1%",
-            yticklabels=((i == 0) | (i == len(disc_list) - 2)),
+            yticklabels=((i == 0) | (i == len(disc_list) - 1)),
             linewidth=2,
             linecolor="white",
             square=False,
@@ -85,7 +91,7 @@ def multi_disc_y():
             cmap="Oranges",
         )
 
-        if i != 0 and i != len(disc_list) - 2:
+        if i != 0 and i != len(disc_list) - 1:
             ax[i].set(ylabel=None)
 
         if i == 0:
@@ -97,5 +103,8 @@ def multi_disc_y():
     return fig
 
 
-fig4 = multi_disc_y()
+fig4 = multi_disc_("Exited")
 st.pyplot(fig4)
+
+fig5 = multi_disc_("Tenure")
+st.pyplot(fig5)

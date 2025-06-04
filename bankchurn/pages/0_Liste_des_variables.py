@@ -20,5 +20,6 @@ st.table(
     }
 )
 
-if st.button("add B"):
-    st.session_state.session_disc_list.append("bbbbbbbbb")
+st.markdown(
+    '##### La variable "Tenure" est considérée comme variable continue mais sera aussi analysée en tant que variable discrète dans les analyses multivariées discrètes/discrètes et discrètes/continues'
+)

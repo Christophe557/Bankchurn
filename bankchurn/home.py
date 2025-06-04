@@ -65,5 +65,3 @@ st.markdown("##### Infomations :")
 buffer = io.StringIO()
 df.info(buf=buffer)
 st.text(buffer.getvalue())
-if st.button("add A"):
-    st.session_state.session_disc_list.append("aaaaaaaaa")

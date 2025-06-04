@@ -94,6 +94,7 @@ def mono_cont2():
             ax=ax[1, i],
             kind="box",
             vert=False,
+            # orientation="horizontal",
             color="black",
         )
         ax[1, i].set(ylabel=None, yticklabels=[])
