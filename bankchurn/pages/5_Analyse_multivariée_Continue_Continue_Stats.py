@@ -28,7 +28,7 @@ def multi_cont_cont():
                 palette="Set2",
                 alpha=0.5,
                 legend=i + j == 0,
-                s=10,
+                s=5,
             )
 
             if i != 0 and i != len(cont_list) - 1:
