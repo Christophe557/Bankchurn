@@ -18,12 +18,25 @@ st.subheader("Exploratory Data Analysis")
 
 
 @st.cache_data(ttl=60)
-def load_data(filename):
+def load_data(filename: str) -> pd.DataFrame:
+    """Load dataset from the file in dataset directory
+
+    Args:
+        filename (str): name of the file
+
+    Returns:
+        pd.DataFrame: dataframe data
+    """
     data = pd.read_csv(os.path.join(projectpath, "dataset", filename))
     return data
 
 
 def variables_list_initialization():
+    """initialization of :
+    dataset : session_df
+    list of discret variables : session_disc_list
+    list of continuous variables : session_cont_list
+    """
     if "session_df" not in st.session_state:
         st.session_state.session_df = load_data("train_data.csv")
     if "session_disc_list" not in st.session_state:

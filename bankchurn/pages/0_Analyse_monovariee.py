@@ -1,11 +1,30 @@
 import matplotlib.pyplot as plt
+import matplotlib.figure
 import streamlit as st
 from home import variables_list_initialization
+
+st.set_page_config(layout="wide")
 
 variables_list_initialization()
 df = st.session_state.session_df
 disc_list = st.session_state.session_disc_list
 cont_list = st.session_state.session_cont_list
+
+st.markdown("### 2- Liste des variables")
+st.table(
+    {
+        "": ["Identifiants ", "Variables discrètes", "Variables continues", "Autres"],
+        "Variables": [
+            "ID",
+            " | ".join(disc_list),
+            " | ".join(cont_list),
+            "CustomerID | Surname",
+        ],
+    }
+)
+st.markdown(
+    '##### La variable "Tenure" est considérée comme variable continue mais sera aussi analysée en tant que variable discrète dans les analyses multivariées discrètes/discrètes et discrètes/continues'
+)
 
 
 st.markdown("### 3- Analyse monovariée")
@@ -13,7 +32,12 @@ st.markdown("##### Analyse monovariée discrète")
 
 
 @st.cache_data()
-def mono_disc():
+def mono_disc() -> matplotlib.figure:
+    """return a figure with axes, each axe display a univaried analysis of a variable from disc_list
+
+    Returns:
+        matplotlib.figure: the resulted figure
+    """
     fig, ax = plt.subplots(2, 3, sharey=True, figsize=(15, 6))
     fig.suptitle("ANALYSE MONOVARIEE VARIABLES DISCRETES")
     for i, v in enumerate(disc_list):
